@@ -123,6 +123,16 @@ Usage: M0SETAP [登録AP番号 SSID パスワード [ON]]
 
 
 ## ■ M0SETCLR
+前景色、背景色、ボーダー色を設定する。
+
+
+```txt:Usage: 
+Usage: M0SETCLR [/Fnum] [/Bnum] [/Dnum]
+```
+
+ - パラメータなしで実行すると、現在の設定を表示します。
+ - スイッチは `-` でも `/` でもよく、大文字/小文字も判断しません。
+ - 無効なスイッチは無視されます。
 
 
 ## ■ M0SETUP
@@ -171,7 +181,7 @@ Usage: M0VER
 
  - MSX0 に関するバージョンを表示します。
  - MSX-DOS1 では MSX-DOS に関する詳しいバージョン情報を取得できません。
-
+ 
 **See also:**
 
  - [MDL-LIB version 2.2 の使い方 (Qiita)](https://qiita.com/ht_deko/items/6f15aee0bd25b550e4df)

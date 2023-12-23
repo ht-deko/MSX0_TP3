@@ -1,53 +1,58 @@
-# �� MDLLIB
-**�wMDL-LIB version 2.2�x** �� Martijn Dekker ���ɂ���č��ꂽ�wTurbo Pascal 3.0�x�p MSX ���C�u�����ł� (�p�u���b�N�h���C��)�B���ׂĂ� BDOS �� BIOS ���ԗ�����Ă���킯�ł͂���܂��񂪁ABDOS �� BIOS �����܂�ӎ����鎖�Ȃ� MSX �̌ŗL�@�\���g���܂��B
+﻿# MSX0 用ライブラリ
+自作ライブラリや自作ライブラリが参照しているライブラリの一覧です。
+
+## ■ MDLLIB
+**『MDL-LIB version 2.2』** は Martijn Dekker 氏によって作られた『Turbo Pascal 3.0』用 MSX ライブラリです (パブリックドメイン)。すべての BDOS や BIOS が網羅されているわけではありませんが、BDOS や BIOS をあまり意識する事なく MSX の固有機能が使えます。
 
  - [MDL-LIB 2.2 Pascal Bios include files (hansotten.com)](http://pascal.hansotten.com/delphi/turbo-pascal-on-cpm-msx-dos-and-ms-dos/)
 
+※このリポジトリには含まれていません。
 
-# �� MSXUTILS
-�l�I�ɕK�v�����Ȃ��̂� MSXUTILS.LIB �Ƃ��ĕʓr��`���܂��B
 
-| �t�@�C���� | �ˑ����C�u���� |
+## ■ MSXUTILS
+個人的に必要そうなものを MSXUTILS.LIB として別途定義します。
+
+| ファイル名 | 依存ライブラリ |
 |:---|:---|
 | MSXUTILS.LIB | MDLLIB.LIB |
 
 
-# �� EXTBIOS
-�g�� BIOS �֘A�� EXTBIOS.LIB �Ƃ��ĕʓr��`���܂��B
+## ■ EXTBIOS
+拡張 BIOS 関連を EXTBIOS.LIB として別途定義します。
 
-| �t�@�C���� | �ˑ����C�u���� |
+| ファイル名 | 依存ライブラリ |
 |:---|:---|
 | EXTBIOS.LIB | MDLLIB.LIB |
 
 
-# �� SYSUTILS
-�悭�g���ł��낤�@�\�����Ă���܂��B
+## ■ SYSUTILS
+よく使うであろう機能を入れてあります。
 
-| �t�@�C���� | �ˑ����C�u���� |
+| ファイル名 | 依存ライブラリ |
 |:---|:---|
 | EXTBIOS.LIB |  |
 
 
-# �� IOT.LIB
-Turbo Pascal ���� IoT Basic �̋@�\���g�����߂̃��C�u�����ł��B
-[HRA! ����̃R�[�h](https://github.com/hra1129/for_MSX0/tree/main/sample_program/002_device/2023_05_30_1st_update_version/basicn)���Q�l�ɂ��Ă��܂��B
+## ■ IOT.LIB
+Turbo Pascal から IoT Basic の機能を使うためのライブラリです。
+[HRA! さんのコード](https://github.com/hra1129/for_MSX0/tree/main/sample_program/002_device/2023_05_30_1st_update_version/basicn)を参考にしています。
 
-| �t�@�C���� | �ˑ����C�u���� |
+| ファイル名 | 依存ライブラリ |
 |:---|:---|
 | EXTBIOS.LIB | SYSUTILS.LIB |
 
 
-# �� LCD.LIB
-MSX0 (MSX-DOS) �Ŏg���� Liquid Crystal Display (LCD) ���C�u�����ł��B
+## ■ LCD.LIB
+MSX0 (MSX-DOS) で使える Liquid Crystal Display (LCD) ライブラリです。
 
-| �t�@�C���� | �ˑ����C�u���� |
+| ファイル名 | 依存ライブラリ |
 |:---|:---|
 | LCD.LIB | SYSUTILS.LIB, IOT.LIB|
 
 
 **See also:**
 
- - [MDL-LIB version 2.2 �̎g���� (Qiita)](https://qiita.com/ht_deko/items/6f15aee0bd25b550e4df)
- - [�yMSX0�zIOT.LIB (Qiita)](https://qiita.com/ht_deko/items/a5c0bf6e7969093beb3c)
- - [�yMSX0�zLCD.LIB (Qiita)](https://qiita.com/ht_deko/items/084bdf1abaeb12753b38)
+ - [MDL-LIB version 2.2 の使い方 (Qiita)](https://qiita.com/ht_deko/items/6f15aee0bd25b550e4df)
+ - [【MSX0】IOT.LIB (Qiita)](https://qiita.com/ht_deko/items/a5c0bf6e7969093beb3c)
+ - [【MSX0】LCD.LIB (Qiita)](https://qiita.com/ht_deko/items/084bdf1abaeb12753b38)
  
