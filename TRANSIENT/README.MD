@@ -4,8 +4,8 @@ MSX0 用に作られたトランジェントコマンドです。基本的に 48
 ## ■ M0CHGAP
 Wi-Fi の AP リストを登録する。
 
-```
-Usage: M0SETAP [登録AP番号 SSID パスワード [ON]]
+```txt:Usage:
+M0SETAP [登録AP番号 SSID パスワード [ON]]
 ```
 
  - パラメータなしで実行すると、AP リストを表示します。
