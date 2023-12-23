@@ -37,7 +37,7 @@ M0CHGDSK [ディスクイメージ]
 入力デバイスの変更を行う。
 
 ```
-Usage: M0ChgInp [/Gnum] [/Pnum] [/Jnum] [/Anum] [/Bnum]
+M0ChgInp [/Gnum] [/Pnum] [/Jnum] [/Anum] [/Bnum]
 ```
 
 [Setup Utility の Input](https://qiita.com/ht_deko/items/b284cb93ac34e2b77d9a#input) と同等の設定を行います。
@@ -97,7 +97,7 @@ M0CLKUP [パーセント]
 I<sup>2</sup>C スキャナ。
 
 ```
-Usage: M0I2CSCN
+M0I2CSCN
 ```
 
  - I<sup>2</sup>C ノードのデバイスを検索し、その ID を表示します。
