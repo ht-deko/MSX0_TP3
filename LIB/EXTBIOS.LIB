@@ -1,0 +1,44 @@
+(*
+    EXTBIOS.LIB
+*)
+
+  procedure ExtBios;
+  var
+    raf : integer absolute $0103;
+    rbc : integer absolute $0105;
+    rde : integer absolute $0107;
+    rhl : integer absolute $0109;
+  begin
+    inline($2A/raf/       { LD HL,(raf)     }
+           $E5/           { PUSH HL         }
+           $F1/           { POP AF          }
+           $ED/$4B/rbc/   { LD BC,(rbc)     }
+           $ED/$5B/rde/   { LD DE,(rde)     }
+           $2A/rhl/       { LD HL,(rhl)     }
+           $CD/$CA/$FF/   { CALL EXTBIO     }
+           $ED/$43/rbc/   { LD (rbc),BC     }
+           $ED/$53/rde/   { LD (rde),DE     }
+           $22/rhl/       { LD (rhl),HL     }
+           $F5/           { PUSH AF         }
+           $E1/           { POP HL          }
+           $22/raf);      { LD (raf),HL     }
+  end;
+
+  function GetKMode: Byte;
+  begin
+    LibRegs.D := $11;
+    LibRegs.E := $00;
+    LibRegs.A := $FF;
+    ExtBios;
+    GetKMode := LibRegs.A;
+  end;
+  
+  procedure SetKMode(Mode: Byte);
+  begin
+    if not (Mode in [0..4]) then
+      Mode := 0;
+    LibRegs.D := $11;
+    LibRegs.E := $01;
+    LibRegs.A := Mode;
+    ExtBios;
+  end;

@@ -1,0 +1,133 @@
+(*
+    SYSUTILS.LIB
+*)
+
+type
+  HexStr  = string[8];
+  BinStr  = string[32];
+  ItemStr = string[80];
+
+  PItem = ^TItem;
+  TItem = record
+    Data: ItemStr;
+    Prev: PItem;
+    Next: PItem;
+  end;
+
+  procedure AddListItem(var List, Last: PItem; s: ItemStr);
+  var
+    p: PItem;
+  begin
+    New(p);
+    if List = nil then
+      begin
+        List := p;
+        Last := nil;
+      end
+    else
+      Last^.Next := p;
+    p^.Data := s;
+    p^.Prev := Last;
+    p^.Next := nil;
+    Last := p;
+  end;
+
+  procedure ClearListItem(var List: PItem);
+  var
+    p, n: PItem;
+  begin
+    p := List;
+    while p <> nil do
+      begin
+        n := p^.Next;
+        Dispose(p);
+        p := n;
+      end;
+    List := nil;
+  end;
+
+  function UpperCase(s: ItemStr): ItemStr;
+  var
+    r: ItemStr;
+    i: byte;
+  begin
+    r[0] := s[0];
+    for i:=1 to Length(s) do
+      begin
+        if s[i] in ['a'..'z'] then
+          r[i] := Chr(Ord(s[i]) - 32)
+        else  
+          r[i] := s[i];
+      end;
+    UpperCase := r;  
+  end;
+
+  function LowerCase(s: ItemStr): ItemStr;
+  var
+    r: ItemStr;
+    i: byte;
+  begin
+    r[0] := s[0];
+    for i:=1 to Length(s) do
+      begin
+        if s[i] in ['A'..'Z'] then
+          r[i] := Chr(Ord(s[i]) + 32)
+        else  
+          r[i] := s[i];
+      end;
+    LowerCase := r;  
+  end;
+
+  function Inkey: char;
+  var
+    c: char;
+  begin
+    Inkey := #$00;
+    if KeyPressed then
+    begin
+      Read(kbd, c);
+      Inkey := c;
+    end;
+  end;
+
+  function IntToHex(v: Integer; w: byte): HexStr;
+  var
+    s: HexStr;
+  begin
+    if w < 1 then w := 1;
+    if w > 4 then w := 4;
+    s[0] := Chr(w);
+    while w > 0 do
+    begin
+      if v = 0 then
+        s[w] := '0'
+      else  
+      begin
+        s[w] := Chr($30 + Ord(v and $000F > 9) * 7 + v and $000F);
+        v := v shr 4;
+      end;  
+      w := w - 1;
+    end; 
+    IntToHex := s;
+  end; 
+
+  function IntToBin(v: Integer; w: byte): BinStr;
+  var
+    s: BinStr;
+  begin
+    if w <  1 then w :=  1;
+    if w > 16 then w := 16;
+    s[0] := Chr(w);
+    while w > 0 do
+    begin
+      if v = 0 then
+        s[w] := '0'
+      else  
+      begin
+        s[w] := Chr($30 + Ord(v and 1));
+        v := v shr 4;
+      end;  
+      w := w - 1;
+    end; 
+    IntToBin := s;
+  end; 

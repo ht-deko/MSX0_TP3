@@ -1,0 +1,83 @@
+(*
+    IOT.LIB
+*)
+
+  procedure IotSetNode(s: LibStr);
+  var
+    i, l: byte;
+  begin
+    port[8] := $E0; port[8] := $01; port[8] := $53; port[8] := $C0;
+    l := Length(s); port[8] := l;
+    for i:=1 to l do port[8] := Ord(s[i]);
+    port[8] := $00; l := port[8];
+  end;
+
+  function IoTFindCount(s: LibStr): integer;
+  var
+    r: array [0..1] of byte;
+    v: integer absolute r;
+  begin
+    IotSetNode(s);
+    port[8] := $E0; port[8] := $01; port[8] := $11; port[8] := $80;
+    r[0] := port[8]; r[0] := port[8]; r[1] := port[8];
+    IoTFindCount := v;  
+  end; { IoTFindCount }  
+
+  procedure IoTFind(s: LibStr; var List, Last: PItem);
+  var
+    r: LibStr;
+    i, j, l, Cnt: byte;
+  begin
+    ClearListItem(List);
+    Cnt := IoTFindCount(s);
+    IotSetNode(s);
+    port[8] := $E0; port[8] := $01; port[8] := $13; port[8] := $80;
+    for j:=1 to Cnt do
+      begin
+        l := port[8]; r[0] := Chr(l);
+        for i:=1 to l do r[i] := Chr(port[8]);
+        AddListItem(List, Last, r);
+      end;
+  end; { IoTFind }
+
+  function IoTGetInt(s: LibStr): integer;
+  var
+    r: array [0..1] of byte;
+    v: integer absolute r;
+  begin
+    IotSetNode(s);
+    port[8] := $E0; port[8] := $01; port[8] := $01; port[8] := $80;
+    r[0] := port[8]; r[0] := port[8]; r[1] := port[8];
+    IoTGetInt := v;  
+  end; { IoTGetInt }  
+
+  function IoTGetStr(s: LibStr): LibStr;
+  var
+    r: LibStr;
+    i, l: byte;
+  begin
+    IotSetNode(s);
+    port[8] := $E0; port[8] := $01; port[8] := $03; port[8] := $80;
+    l := port[8]; r[0] := Chr(l);
+    for i:=1 to l do r[i] := Chr(port[8]);
+    IoTGetStr := r;
+  end; { IoTGetStr }
+
+  procedure IoTPutInt(s: LibStr; v: integer);
+  begin
+    IotSetNode(s);
+    port[8] := $E0; port[8] := $01; port[8] := $41; port[8] := $C0; 
+    port[8] := SizeOf(integer);
+    port[8] := v and $00FF; port[8] := v shr 8;
+  end; { IoTPutInt }  
+  
+  procedure IoTPutStr(s: LibStr; v: LibStr);
+  var
+    i, l: byte;
+  begin
+    IotSetNode(s);
+    port[8] := $E0; port[8] := $01; port[8] := $43; port[8] := $C0;
+    l := Length(v); port[8] := l;
+    for i:=1 to l do port[8] := Ord(v[i]);
+    port[8] := $00; l := port[8];
+  end; { IoTPutStr }  

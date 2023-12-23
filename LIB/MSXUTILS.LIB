@@ -1,0 +1,42 @@
+(*
+    MSXUTILS.LIB
+*)
+
+
+type
+  TQCB = record
+    POffset: byte;
+    GOffset: byte;
+    Backup: byte;
+    QueLen: byte;
+    QueAddr: integer;
+  end;
+
+const
+  QCBInit: TQCB = (POffset:$ff;GOffset:0;Backup:0;QueLen:$ff;QueAddr:0);
+  NullPlayData: array [0..1] of byte = ($00, $ff);
+
+var
+  sys_quetab: array [0..3] of TQCB absolute $F959;
+  sys_musicf: byte absolute $FB3F;
+  sys_plycnt: byte absolute $FB40;
+  sys_oldkey: array [0..10] of byte absolute $FBDA;
+  sys_newkey: array [0..10] of byte absolute $FBE5;
+  sys_kanamd: byte absolute $FCAD; { Key layout }
+
+{ Play MML Intermediate Code }
+
+procedure Play(Cnt: byte);
+begin
+  sys_plycnt := Cnt;
+  Bios($0099);
+end;
+
+{ Sense the key matrix }
+
+function SenseKB(row: byte): byte;
+begin
+  libregs.A := row;
+  Bios($0141);
+  SenseKB := libregs.A
+end;
