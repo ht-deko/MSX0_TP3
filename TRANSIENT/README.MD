@@ -4,7 +4,7 @@ MSX0 用に作られたトランジェントコマンドです。基本的に 48
 ## ■ M0CHGAP
 Wi-Fi の AP リストを登録する。
 
-```txt:Usage
+```
 M0SETAP [登録AP番号 SSID パスワード [ON]]
 ```
 
@@ -18,7 +18,6 @@ M0SETAP [登録AP番号 SSID パスワード [ON]]
 
 ## ■ M0CHGDSK
 ディスク交換を行う。
-
 
 ```
 M0CHGDSK [ディスクイメージ]
@@ -84,7 +83,7 @@ Usage: M0ChgInp [/Gnum] [/Pnum] [/Jnum] [/Anum] [/Bnum]
 ## ■ M0CLKUP
 エミュレータのクロックアップを行う。
 
-```Usage: 
+```
 M0CLKUP [パーセント]  
 ```
 
@@ -97,7 +96,7 @@ M0CLKUP [パーセント]
 ## ■ M0I2CSCN
 I<sup>2</sup>C スキャナ。
 
-```Usage: 
+```
 Usage: M0I2CSCN
 ```
 
@@ -110,8 +109,8 @@ Usage: M0I2CSCN
 ## ■ M0SETAP
 Wi-Fi の AP リストを登録する。
 
-```Usage: 
-Usage: M0SETAP [登録AP番号 SSID パスワード [ON]]
+```
+M0SETAP [登録AP番号 SSID パスワード [ON]]
 ```
 
  - パラメータなしで実行すると、AP リストを表示します。
@@ -126,8 +125,8 @@ Usage: M0SETAP [登録AP番号 SSID パスワード [ON]]
 前景色、背景色、ボーダー色を設定する。
 
 
-```txt:Usage: 
-Usage: M0SETCLR [/Fnum] [/Bnum] [/Dnum]
+```
+M0SETCLR [/Fnum] [/Bnum] [/Dnum]
 ```
 
  - パラメータなしで実行すると、現在の設定を表示します。
@@ -139,8 +138,8 @@ Usage: M0SETCLR [/Fnum] [/Bnum] [/Dnum]
 Setup Utility を起動する。
 
 
-```Usage: 
-Usage: M0SETUP
+```
+M0SETUP
 ```
 
  - Setup Utility を起動します。
@@ -150,7 +149,7 @@ Usage: M0SETUP
 ## ■ M0SHTDN
 電源断または再起動を行う。
 
-```Usage: 
+```
 M0SHTDN [-h|-r]
 ```
 
@@ -161,8 +160,8 @@ M0SHTDN [-h|-r]
 ## ■ M0TPASZ
 TPA サイズを表示。
 
-```Usage: 
-Usage: M0TPASZ
+```
+M0TPASZ
 ```
 
  - TPA サイズを表示します。
@@ -173,8 +172,8 @@ Usage: M0TPASZ
 ## ■ M0VER
  バージョン情報。
 
-```Usage: 
-Usage: M0VER
+```
+M0VER
 ```
 
  - MSX0 に関するバージョンを表示します。
