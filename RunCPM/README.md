@@ -3,7 +3,7 @@ Windows 用にコンパイルした [RunCPM](https://github.com/MockbaTheBorg/Ru
 
  - CP/M-80 v2.2 エミュレータで、MSX-DOS のクロスコンパイル環境として使えます。  
  - Visual Studio 2019 でコンパイルされています。 
- - RunCPM のリポジトリから A ドライブのファイル群 ([RunCPM/DISK/A.ZIP](https://github.com/MockbaTheBorg/RunCPM/tree/master/DISK)) を持ってくる必要があります。  
+ - RunCPM のリポジトリから A ドライブのファイル群 ([RunCPM/DISK/A.ZIP](https://github.com/MockbaTheBorg/RunCPM/tree/master/DISK)) を持ってくる必要があります (`.\A\0\` に展開します。B ドライブ以降はご自由に)。  
  - 内部 CCP を使っているので、CCP ファイルは必要ありません。
  - 64KB システムです。
  - 他の方がコンパイルされた [Windows 用バイナリ (MinGW)](https://github.com/guidol70/RunCPM_Windows) もあります。
