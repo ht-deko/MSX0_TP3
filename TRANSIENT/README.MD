@@ -99,7 +99,7 @@ I<sup>2</sup>C スキャナ。
 
 ```Usage: 
 Usage: M0I2CSCN
-``
+```
 
  - I<sup>2</sup>C ノードのデバイスを検索し、その ID を表示します。
  - 内部接続 (Internal) は `device/i2c_i` にリストされます。
