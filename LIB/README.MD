@@ -30,7 +30,7 @@
 
 | ファイル名 | 依存ライブラリ |
 |:---|:---|
-| EXTBIOS.LIB |  |
+| SYSUTILS.LIB |  |
 
 
 ## ■ IOT.LIB
@@ -39,7 +39,7 @@ Turbo Pascal から IoT Basic の機能を使うためのライブラリです�
 
 | ファイル名 | 依存ライブラリ |
 |:---|:---|
-| EXTBIOS.LIB | SYSUTILS.LIB |
+| IOT.LIB | SYSUTILS.LIB |
 
 
 ## ■ LCD.LIB
