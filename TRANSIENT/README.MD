@@ -161,8 +161,6 @@ M0SHTDN [-h|-r]
 ## ■ M0TPASZ
 TPA サイズを表示。
 
-![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/21785/cc7a6ddd-5127-82e4-6065-0b339f54786a.png)
-
 ```Usage: 
 Usage: M0TPASZ
 ```
