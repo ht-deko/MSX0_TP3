@@ -20,7 +20,7 @@ begin
   begin
     node := 'device/i2c_' + bus[i];
     Writeln(node, ':');
-    n := IotFind(node);
+    n := IotFindCount(node);
     IotFind(node, List, Last);
     p := List;
     while p <> nil do
