@@ -45,7 +45,3 @@ TINST で切り替えるのが面倒なら、C0 ドライブに開発用 (ANSI)�
  - [RunCPM - Z80 CP/M emulator (GitHub: @MockbaTheBorg)](https://github.com/MockbaTheBorg/RunCPM)
  - [RunCPM (Z80 CP/M 2.2 エミュレータ) (ht-deko.com)](https://ht-deko.com/arduino/runcpm.html)
  - [RunCPM for Windows - a text-based CP/M-Emulator (GitHub: @guidol70)](https://github.com/guidol70/RunCPM_Windows)
- - [Turbo Pascal 3.0.x の使い方](https://qiita.com/ht_deko/items/ec212f5cc17cbe5f718b)
-   - [Turbo Pascal 3.0.x の Pascal](https://qiita.com/ht_deko/items/f9f394dc2342afd2ea7b)
-   - [Turbo Pascal 3.0.x のスクリーン設定](https://qiita.com/ht_deko/items/0d8976801c02ec685bd6)
-   - [Turbo Pascal 3.0.x のキーボードショートカット](https://qiita.com/ht_deko/items/86ddf71d0c509125b7ba)
