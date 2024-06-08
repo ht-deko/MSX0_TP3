@@ -1,0 +1,63 @@
+(*
+    SPRITE1.LIB
+*)
+
+type
+  TSpriteData8 = array [0..7] of byte;
+  TSpriteData16 = array [0..31] of byte;
+  TSpriteAttr =
+    record
+      Row: byte;
+      Col: byte;
+      PatNo: byte;
+      Color: byte;
+    end;
+
+var
+  _PatAddr: Integer;
+  _AtrAddr: Integer;
+  _PatSize: byte;
+
+procedure InitSprite(Size: byte);
+begin
+  _PatAddr := PattTable;
+  _AtrAddr := TranspTable;
+  if (Size mod 2) = 0 then
+    _PatSize := 8
+  else
+    _PatSize := 32;
+  ClearSprites;
+  SpriteSize(Size);
+end;
+
+function CalcPatAddr(Pat: byte): Integer;
+begin
+  CalcPatAddr := _PatAddr + Pat * _PatSize;
+end;
+
+function CalcAtrAddr(Plane: byte): Integer;
+begin
+  CalcAtrAddr := _AtrAddr + Plane * 4;
+end;
+
+procedure Sprite(Pat: byte; var Ptn: byte);
+begin
+  LibRegs.BC := _PatSize;
+  LibRegs.DE := _PatAddr + Pat * LibRegs.BC;
+  LibRegs.HL := Addr(Ptn);
+  Bios($005C);
+end;
+
+procedure PutSprite(Plane: byte; X, Y: byte; Color: byte; Pat: byte);
+var
+  Attr: TSpriteAttr;
+begin
+  Attr.Col := X;
+  Attr.Row := Y;
+  Attr.PatNo := Pat;
+  Attr.Color := Color;
+  LibRegs.HL := Addr(Attr);
+  LibRegs.BC := 4;
+  LibRegs.DE := _AtrAddr + Plane * LibRegs.BC;
+  Bios($005C);
+end;

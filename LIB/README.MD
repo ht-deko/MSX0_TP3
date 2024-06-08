@@ -1,4 +1,4 @@
-﻿# MSX0 用 Turbo Pascal ライブラリ
+﻿?# MSX0 用 Turbo Pascal ライブラリ
 自作ライブラリや自作ライブラリが参照しているライブラリの一覧です。
 
 ## ■ MDLLIB
@@ -23,6 +23,15 @@
 | ファイル名 | 依存ライブラリ |
 |:---|:---|
 | EXTBIOS.LIB | MDLLIB.LIB |
+
+
+## ■ SPRITE
+スプライト関連を SPRITE1.LIB / SPRITE2.LIB として別途定義します。
+
+| ファイル名 | 依存ライブラリ |
+|:---|:---|
+| SPRITE1.LIB | MDLLIB.LIB, VRAM1.LIB |
+| SPRITE2.LIB | MDLLIB.LIB, VRAM2.LIB |
 
 
 ## ■ SYSUTILS
