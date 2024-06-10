@@ -15,43 +15,43 @@ type
   TSpClrs = array [0..15] of byte;
 
 var
-  _PtnAddr: Integer;
-  _AtrAddr: Integer;
-  _ClrAddr: Integer;
-  _PtnSize: byte;
+  _SpPtnAddr: Integer;
+  _SpAtrAddr: Integer;
+  _SpClrAddr: Integer;
+  _SpPtnSize: byte;
 
 procedure InitSprite(Size: byte);
 begin
-  _PtnAddr := PattTable;
-  _AtrAddr := TranspTable;
-  _ClrAddr := ColorTable;
+  _SpPtnAddr := PattTable;
+  _SpAtrAddr := TranspTable;
+  _SpClrAddr := ColorTable;
   if (Size mod 2) = 0 then
-    _PtnSize := 8
+    _SpPtnSize := 8
   else
-    _PtnSize := 32;
+    _SpPtnSize := 32;
   ClearSprites;
   SpriteSize(Size);
 end;
 
-function CalcPtnAddr(PtnNo: byte): Integer;
+function CalcSpPtnAddr(PtnNo: byte): Integer;
 begin
-  CalcPtnAddr := _PtnAddr + PtnNo * _PtnSize;
+  CalcSpPtnAddr := _SpPtnAddr + PtnNo * _SpPtnSize;
 end;
 
-function CalcAtrAddr(Plane: byte): Integer;
+function CalcSpAtrAddr(Plane: byte): Integer;
 begin
-  CalcAtrAddr := _AtrAddr + Plane * 4;
+  CalcSpAtrAddr := _SpAtrAddr + Plane * 4;
 end;
 
-function CalcClrAddr(Plane: byte): Integer;
+function CalcSpClrAddr(Plane: byte): Integer;
 begin
-  CalcClrAddr := _ClrAddr + Plane * 16;
+  CalcSpClrAddr := _SpClrAddr + Plane * 16;
 end;
 
 procedure SetSpritePtn(PtnNo: byte; var Ptn: byte);
 begin
-  LibRegs.BC := _PtnSize;
-  LibRegs.DE := _PtnAddr + PtnNo * LibRegs.BC;
+  LibRegs.BC := _SpPtnSize;
+  LibRegs.DE := _SpPtnAddr + PtnNo * LibRegs.BC;
   LibRegs.HL := Addr(Ptn);
   Bios($005C);
 end;
@@ -60,7 +60,7 @@ procedure ColorSprite(Plane: byte; var Colors: byte);
 begin
   LibRegs.HL := Addr(Colors);
   LibRegs.BC := 16;
-  LibRegs.DE := _ClrAddr + Plane * LibRegs.BC;
+  LibRegs.DE := _SpClrAddr + Plane * LibRegs.BC;
   Bios($005C);
 end;
 
@@ -74,7 +74,7 @@ begin
   Atr.Color := Color;
   LibRegs.HL := Addr(Atr);
   LibRegs.BC := 4;
-  LibRegs.DE := _AtrAddr + Plane * LibRegs.BC;
+  LibRegs.DE := _SpAtrAddr + Plane * LibRegs.BC;
   Bios($005C);
 end;
 
@@ -82,7 +82,7 @@ procedure SetSpriteAtr(Plane: byte; var Atr: TSpAtr);
 begin
   LibRegs.HL := Addr(Atr);
   LibRegs.BC := 4;
-  LibRegs.DE := _AtrAddr + Plane * LibRegs.BC;
+  LibRegs.DE := _SpAtrAddr + Plane * LibRegs.BC;
   Bios($005C);
 end;
 
