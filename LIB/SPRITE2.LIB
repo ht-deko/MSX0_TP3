@@ -45,7 +45,7 @@ end;
 
 function CalcClrAddr(Plane: byte): Integer;
 begin
-  CalcClrAddr := _ColAddr + Plane * 16;
+  CalcClrAddr := _ClrAddr + Plane * 16;
 end;
 
 procedure SetSpritePtn(Pat: byte; var Ptn: byte);
@@ -60,7 +60,7 @@ procedure ColorSprite(Plane: byte; var Colors: byte);
 begin
   LibRegs.HL := Addr(Colors);
   LibRegs.BC := 16;
-  LibRegs.DE := _ColAddr + Plane * LibRegs.BC;
+  LibRegs.DE := _ClrAddr + Plane * LibRegs.BC;
   Bios($005C);
 end;
 
