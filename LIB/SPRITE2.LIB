@@ -17,14 +17,14 @@ type
 var
   _PatAddr: Integer;
   _AtrAddr: Integer;
-  _ColAddr: Integer;
+  _ClrAddr: Integer;
   _PatSize: byte;
 
 procedure InitSprite(Size: byte);
 begin
   _PatAddr := PattTable;
   _AtrAddr := TranspTable;
-  _ColAddr := ColorTable;
+  _ClrAddr := ColorTable;
   if (Size mod 2) = 0 then
     _PatSize := 8
   else
@@ -43,9 +43,9 @@ begin
   CalcAtrAddr := _AtrAddr + Plane * 4;
 end;
 
-function CalcColAddr(Plane: byte): Integer;
+function CalcClrAddr(Plane: byte): Integer;
 begin
-  CalcAtrAddr := _ColAddr + Plane * 16;
+  CalcClrAddr := _ColAddr + Plane * 16;
 end;
 
 procedure SetSpritePtn(Pat: byte; var Ptn: byte);
@@ -85,3 +85,8 @@ begin
   LibRegs.DE := _AtrAddr + Plane * LibRegs.BC;
   Bios($005C);
 end;
+
+procedure ShowSprite(Flg: Boolean);
+begin
+  WriteVdp(8, (ReadVdp(8) and $FD) or (Ord(not Flg) shl 1));
+end;    
