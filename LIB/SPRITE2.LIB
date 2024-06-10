@@ -3,16 +3,16 @@
 *)
 
 type
-  TSpriteData8 = array [0..7] of byte;
-  TSpriteData16 = array [0..31] of byte;
-  TSpriteAttr =
+  TSpDat8 = array [0..7] of byte;
+  TSpDat16 = array [0..31] of byte;
+  TSpAtr =
     record
       Row: byte;
       Col: byte;
       PatNo: byte;
       Color: byte;
     end;
-  TSpriteColors = array [0..15] of byte;
+  TSpClrs = array [0..15] of byte;
 
 var
   _PatAddr: Integer;
@@ -48,7 +48,7 @@ begin
   CalcAtrAddr := _ColAddr + Plane * 16;
 end;
 
-procedure Sprite(Pat: byte; var Ptn: byte);
+procedure SetSpritePtn(Pat: byte; var Ptn: byte);
 begin
   LibRegs.BC := _PatSize;
   LibRegs.DE := _PatAddr + Pat * LibRegs.BC;
@@ -66,13 +66,21 @@ end;
 
 procedure PutSprite(Plane: byte; X, Y: byte; Color: byte; Pat: byte);
 var
-  Attr: TSpriteAttr;
+  Atr: TSpAtr;
 begin
-  Attr.Col := X;
-  Attr.Row := Y;
-  Attr.PatNo := Pat;
-  Attr.Color := Color;
-  LibRegs.HL := Addr(Attr);
+  Atr.Col := X;
+  Atr.Row := Y;
+  Atr.PatNo := Pat;
+  Atr.Color := Color;
+  LibRegs.HL := Addr(Atr);
+  LibRegs.BC := 4;
+  LibRegs.DE := _AtrAddr + Plane * LibRegs.BC;
+  Bios($005C);
+end;
+
+procedure SetSpriteAtr(Plane: byte; var Atr: TSpAtr);
+begin
+  LibRegs.HL := Addr(Atr);
   LibRegs.BC := 4;
   LibRegs.DE := _AtrAddr + Plane * LibRegs.BC;
   Bios($005C);
