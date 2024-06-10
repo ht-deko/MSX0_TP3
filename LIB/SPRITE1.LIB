@@ -9,30 +9,30 @@ type
     record
       Row: byte;
       Col: byte;
-      PatNo: byte;
+      PtnNo: byte;
       Color: byte;
     end;
 
 var
-  _PatAddr: Integer;
+  _PtnAddr: Integer;
   _AtrAddr: Integer;
-  _PatSize: byte;
+  _PtnSize: byte;
 
 procedure InitSprite(Size: byte);
 begin
-  _PatAddr := PattTable;
+  _PtnAddr := PattTable;
   _AtrAddr := TranspTable;
   if (Size mod 2) = 0 then
-    _PatSize := 8
+    _PtnSize := 8
   else
-    _PatSize := 32;
+    _PtnSize := 32;
   ClearSprites;
   SpriteSize(Size);
 end;
 
-function CalcPatAddr(Pat: byte): Integer;
+function CalcPtnAddr(PtnNo: byte): Integer;
 begin
-  CalcPatAddr := _PatAddr + Pat * _PatSize;
+  CalcPtnAddr := _PtnAddr + PtnNo * _PtnSize;
 end;
 
 function CalcAtrAddr(Plane: byte): Integer;
@@ -40,21 +40,21 @@ begin
   CalcAtrAddr := _AtrAddr + Plane * 4;
 end;
 
-procedure SetSpritePtn(Pat: byte; var Ptn: byte);
+procedure SetSpritePtn(Ptn: byte; var Ptn: byte);
 begin
-  LibRegs.BC := _PatSize;
-  LibRegs.DE := _PatAddr + Pat * LibRegs.BC;
+  LibRegs.BC := _PtnSize;
+  LibRegs.DE := _PtnAddr + Ptn * LibRegs.BC;
   LibRegs.HL := Addr(Ptn);
   Bios($005C);
 end;
 
-procedure PutSprite(Plane: byte; X, Y: byte; Color: byte; Pat: byte);
+procedure PutSprite(Plane: byte; X, Y: byte; Color: byte; PtnNo: byte);
 var
   Atr: TSpAtr;
 begin
   Atr.Col := X;
   Atr.Row := Y;
-  Atr.PatNo := Pat;
+  Atr.PtnNo := PtnNo;
   Atr.Color := Color;
   LibRegs.HL := Addr(Atr);
   LibRegs.BC := 4;
