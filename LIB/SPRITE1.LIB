@@ -40,7 +40,7 @@ begin
   CalcSpAtrAddr := _SpAtrAddr + Plane * 4;
 end;
 
-procedure SetSpritePtn(PtnNo: byte; var Ptn: byte);
+procedure SetSpritePtn(PtnNo: byte; var Ptn);
 begin
   LibRegs.BC := _SpPtnSize;
   LibRegs.DE := _SpPtnAddr + PtnNo * LibRegs.BC;

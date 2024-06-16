@@ -48,7 +48,7 @@ begin
   CalcSpClrAddr := _SpClrAddr + Plane * 16;
 end;
 
-procedure SetSpritePtn(PtnNo: byte; var Ptn: byte);
+procedure SetSpritePtn(PtnNo: byte; var Ptn);
 begin
   LibRegs.BC := _SpPtnSize;
   LibRegs.DE := _SpPtnAddr + PtnNo * LibRegs.BC;
@@ -56,7 +56,7 @@ begin
   Bios($005C);
 end;
 
-procedure ColorSprite(Plane: byte; var Colors: byte);
+procedure ColorSprite(Plane: byte; var Colors: TSpClrs);
 begin
   LibRegs.HL := Addr(Colors);
   LibRegs.BC := 16;
