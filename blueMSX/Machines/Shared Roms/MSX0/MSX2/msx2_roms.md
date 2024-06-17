@@ -10,7 +10,7 @@ ver:0.05.04
 
 >Exit
  MSX System Unit0
-  Disk
+  Disk     BIOSDUMP.DSK
   Type     MSX2
   Ram Size 1M
   Slot     NONE
