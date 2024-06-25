@@ -1,0 +1,40 @@
+{
+  HAT3D.PAS
+}
+program HAT3D;
+{$I MDLLIB.LIB}
+{$I VRAM1.LIB}
+{$I GRAPMSX1.LIB}
+const
+  Colors: array [0..7] of byte = (1, 5, 8, 13, 12, 7, 10, 15);
+var
+  D: array [0..127] of Integer;
+  X, Y, SX, SY, ZZ: Integer;
+  DR, R, Z: Real;
+begin
+  Color(15, 1, 1); ScrMode(2);
+  for X:=0 to 127 do D[X] := 100;
+  DR := 3.14 / 180;
+  Y := -180;
+  repeat
+    X := -180;
+    repeat
+      R := DR * Sqrt(Int(X * X) + Int(Y * Y));
+      Z := 100 * Cos(R) - 30 * Cos(3 * R);
+      SX := Trunc(64 + X / 3 - Y / 6);
+      SY := Trunc(38 - Y / 6 - Z / 4);
+      if not ((SX < 0) or (SX > 127)) then
+        if not (D[SX] <= SY) then
+        begin
+          ZZ := Trunc((Z + 100) * 0.035) + 1;
+          if ZZ in [1..7] then
+            Plot(SX * 2, SY * 2, Colors[ZZ]);
+          D[SX] := SY;
+        end;
+      X := X + 4;
+    until X > 180;
+    Y := Y + 6;
+  until Y > 180;
+  Readln;
+  Color(15, 4, 7); ScrMode(0); TextMode;
+end.
