@@ -33,5 +33,6 @@ begin
     until X > 180;
     Y := Y + 6;
   until Y > 180;
-  Readln; Color(15, 4, 7); ScrMode(0); TextMode;
+  while not KeyPressed do;
+  Color(15, 4, 7); TextMode;
 end.
