@@ -23,8 +23,8 @@ begin
       Z := 100 * Cos(R) - 30 * Cos(3 * R);
       SX := Trunc(64 + X / 3 - Y / 6);
       SY := Trunc(38 - Y / 6 - Z / 4);
-      if not ((SX < 0) or (SX > 127)) then
-        if not (D[SX] <= SY) then
+      if SX in [0..127] then
+        if D[SX] > SY then
         begin
           Plot(SX * 2, SY * 2, Colors[Trunc((Z + 100) * 0.035) + 1]);
           D[SX] := SY;
