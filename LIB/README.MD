@@ -1,4 +1,4 @@
-# MSX0 用 Turbo Pascal ライブラリ
+﻿?# MSX0 用 Turbo Pascal ライブラリ
 自作ライブラリや自作ライブラリが参照しているライブラリの一覧です。
 
 ## ■ MDLLIB
