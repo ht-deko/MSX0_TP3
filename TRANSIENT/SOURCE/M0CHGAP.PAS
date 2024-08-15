@@ -24,7 +24,7 @@ type
         1..3:
           cAP := cAP + IoTGetStr('conf/wifi/list/' + Chr($30+i) + '/ssid');
         4:
-          cAP := cAP + '<AP Mode>';
+          cAP := cAP + '<AP Mode> ' + IoTGetStr('conf/wifi/ap/ssid');
       end;
       WriteLn(Arrow[i = cIdx], cAP);
     end;
@@ -53,4 +53,3 @@ begin
   else
     ChangeAP;
 end.
-
