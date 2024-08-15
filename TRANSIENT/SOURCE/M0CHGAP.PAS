@@ -1,5 +1,5 @@
 (*
-  M0CHGAP v1.10
+  M0CHGAP v1.20
 *)
 program M0CHGAP;
 type
@@ -15,13 +15,17 @@ type
     cIdx, i: byte;
   begin
     cIdx := IoTGetInt('conf/wifi/id');
-    for i:=0 to 3 do
+    for i:=0 to 4 do
     begin
       cAP := '[' + Chr($30+i) + '] ';
-      if i=0 then
-        cAP := cAP + 'OFF'
-      else
-        cAP := cAP + IoTGetStr('conf/wifi/list/' + Chr($30+i) + '/ssid');
+      case i of
+        0:
+          cAP := cAP + 'OFF';
+        1..3:
+          cAP := cAP + IoTGetStr('conf/wifi/list/' + Chr($30+i) + '/ssid');
+        4:
+          cAP := cAP + '<AP Mode>';
+      end;
       WriteLn(Arrow[i = cIdx], cAP);
     end;
   end; { ShowApListR }
@@ -29,11 +33,11 @@ type
   procedure ChangeAP;
   var
     s: LibStr;
-    Idx, ret: Integer;
+    Idx, Ret: Integer;
   begin
     s := ParamStr(1);
     Val(s, Idx, Ret);
-    if (Ret = 0) and (Idx in [0..3]) then
+    if (Ret = 0) and (Idx in [0..4]) then
     begin
       IoTPutInt('conf/wifi/id', Idx);
       IoTPutInt('conf/save', 1);
