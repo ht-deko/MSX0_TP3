@@ -37,9 +37,13 @@ type
   begin
     Writeln('Registered AP:');
     cIdx := IotGetInt('conf/wifi/id');
-    for i:=1 to 3 do
+    for i:=1 to 4 do
     begin
-      cAP := '[' + Chr($30+i) + '] ' + IotGetStr('conf/wifi/list/' + Chr($30+i) + '/ssid');
+      cAP := '[' + Chr($30+i) + '] ';
+      if i < 4 then
+        cAP := cAP + IotGetStr('conf/wifi/list/' + Chr($30+i) + '/ssid')
+      else
+        cAP := cAP + '<AP Mode> ' + IotGetStr('conf/wifi/ap/ssid');
       WriteLn(Arrow[i = cIdx], cAP);
     end;
   end; { ShowApListR }
@@ -52,9 +56,12 @@ type
   begin
     s := ParamStr(1);
     Val(s, Idx, Ret);
-    if (Ret = 0) and (Idx in [1..3]) then
+    if (Ret = 0) and (Idx in [1..4]) then
     begin
-      s := 'conf/wifi/list/' + Chr($30+Idx);
+      if Idx < 4 then
+        s := 'conf/wifi/list/' + Chr($30+Idx)
+      else
+        s := 'conf/wifi/ap';
       ssid := ParamStr(2);
       pass := ParamStr(3);
       if ssid = '-' then
@@ -88,3 +95,4 @@ begin
   else
     SetAP;
 end.
+

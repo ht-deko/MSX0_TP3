@@ -33,7 +33,7 @@ type
   procedure ChangeAP;
   var
     s: LibStr;
-    Idx, Ret: Integer;
+    Idx, ret: Integer;
   begin
     s := ParamStr(1);
     Val(s, Idx, Ret);
@@ -53,3 +53,4 @@ begin
   else
     ChangeAP;
 end.
+
