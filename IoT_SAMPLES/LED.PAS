@@ -13,19 +13,15 @@ var
   begin
     D := Chr(G shl 4 + B) + Chr(10 shl 4 + R);
     IoTPutStr('device/leds/data', D);
-  end; { AllSame }
-
-  procedure Wait;
-  begin
     sys_timer := 0;
     repeat
     until sys_timer >= 60;
-  end; { Wait }
+  end; { AllSame }
 
   procedure AllOff;
   begin
     IoTPutInt('device/leds/trans_ms', 300);
-    AllSame(0, 0, 0); Wait;
+    AllSame(0, 0, 0);
   end; { AllOff }
 
   procedure RGB;
@@ -33,9 +29,9 @@ var
     IoTPutInt('device/leds/trans_ms', 1000);
     for L:=1 to 3 do
     begin
-      AllSame(15, 0, 0); Wait;
-      ALLSame(0, 15, 0); Wait;
-      ALLSame(0, 0, 15); Wait;
+      AllSame(15, 0, 0);
+      ALLSame(0, 15, 0);
+      ALLSame(0, 0, 15);
     end;
   end; { RGB }
 
