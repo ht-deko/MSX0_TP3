@@ -11,6 +11,7 @@ MSX0 Stack』付属の IoT BASIC サンプルを『Turbo Pascal』へ移植し�
 | DHT_KNJ.PAS | × | 温度湿度センサから取得した値を表示します。 |
 | I2C.PAS | × | DHT20 に対して直接 I<sup>2</sup>C アクセスを行い温度を取得します。 |
 | INFO.PAS | 〇 | システムメニューにある `MSX0 Stack 情報` と同等のプログラムです。 |
+| LED.PAS | 〇 | Face Bottom Base や Battery Bottoms に搭載されている 10 個の LED を iotput 命令を使って制御します。 |
 | PERFORMC.PAS | 〇 | 仮想 Z80 の周波数を振ってオーバークロック余力を測定します。 |
 | RCONSOLE.PAS | 〇 | リモートコンソールに文字列を送信します。 |
 | SEND2NET.PAS | × | 温度湿度センサーから値を取得しサーバーへ送信します。 |
