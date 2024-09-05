@@ -46,7 +46,7 @@ var
         if I = P then
           D := D + Chr(G shl 4 + B) + Chr(R)
         else
-          D := D + #$00#00;
+          D := D + #$00#$00;
       PT[P] := D;
     end;
     IoTPutInt('device/leds/trans_ms', 100);
@@ -74,7 +74,7 @@ var
         if I = P then
           D := D + Chr(G shl 4 + B) + Chr(R)
         else
-          D := D + #$00#00;
+          D := D + #$00#$00;
       PT[P] := D;
     end;
     IoTPutInt('device/leds/trans_ms', 20);
