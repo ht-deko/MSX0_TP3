@@ -22,7 +22,21 @@ var
   begin
     IoTPutInt('device/leds/trans_ms', 300);
     AllSame(0, 0, 0);
-  end; { AllOff }
+  end; { All Off }
+
+  procedure LEDColor(R, G, B: Byte);
+  begin
+    for P := 0 to 9 do
+    begin
+      D := '';
+      for I := 0 to 9 do
+        if I = P then
+          D := D + Chr(G shl 4 + B) + Chr(R)
+        else
+          D := D + #$00#$00;
+      PT[P] := D;
+    end;
+  end; { LEDColor }
 
   procedure RGB;
   begin
@@ -36,19 +50,8 @@ var
   end; { RGB }
 
   procedure Rotate;
-  const
-    R = 0; G = 0; B = 15; (* Blue *)
   begin
-    for P := 0 to 9 do
-    begin
-      D := '';
-      for I := 0 to 9 do
-        if I = P then
-          D := D + Chr(G shl 4 + B) + Chr(R)
-        else
-          D := D + #$00#$00;
-      PT[P] := D;
-    end;
+    LEDColor(0, 0, 15); (* Blue *)
     IoTPutInt('device/leds/trans_ms', 100);
     for L := 1 to 50 do
     begin
@@ -64,19 +67,8 @@ var
   end; { Rotate }
 
   procedure Flash;
-  const
-    R = 15; G = 15; B = 15; (* White *)
   begin
-    for P := 0 to 9 do
-    begin
-      D := '';
-      for I := 0 to 9 do
-        if I = P then
-          D := D + Chr(G shl 4 + B) + Chr(R)
-        else
-          D := D + #$00#$00;
-      PT[P] := D;
-    end;
+    LEDColor(15, 15, 15); (* White *)
     IoTPutInt('device/leds/trans_ms', 20);
     for L := 1 to 200 do
       IoTPutStr('device/leds/data', PT[Random(10)]);
