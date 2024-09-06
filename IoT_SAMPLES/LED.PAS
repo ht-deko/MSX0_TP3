@@ -44,8 +44,8 @@ var
     for L:=1 to 3 do
     begin
       AllSame(15, 0, 0);
-      ALLSame(0, 15, 0);
-      ALLSame(0, 0, 15);
+      AllSame(0, 15, 0);
+      AllSame(0, 0, 15);
     end;
   end; { RGB }
 
