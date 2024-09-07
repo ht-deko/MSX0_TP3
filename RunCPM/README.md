@@ -25,13 +25,14 @@ MSX-DOS の TPA に合わせてコンパイルオプションで End Address を
 | MSX0 Stack<br>MSX-DOS (57.25K) | 20E3 | **DE42** | E106 |
 | MSX0 Stack<br>MSX-DOS (漢字) | 20E3 | **DA42** | DD06 |
 | 56K | 20E3 | **D942** | DC06 |
-| MSX0 Stack<br>MSX-DOS2 (54.5K) | 20E3 | **D342** | D606 |
+| MSX0 Stack<br>Nextor (54.75K) | 20E3 | **D342** | D706 |
+| MSX0 Stack<br>MSX-DOS2 (54.5K) | 20E3 | **D442** | D606 |
+| 54K | 20E3 | **D142** | D406 |
 | MSX0 Stack<br>MSX-DOS2 (漢字) | 20E3 | **CF42** | D206 |
 | 48K | 20E3 | **B942** | BC06 |
 | PC-G850V<br>EborsyEEP (43K) | 20E3 | **A542** | A806 |	   
 | 40K | 20E3 | **9942** | 9C06 |
 | 32K | 20E3 | **7942** | 7C06 | 
- 
 
 ### エスケープシーケンス
 RunCPM では ANSI エスケープシーケンスが使われていますが、MSX-DOS は VT52 サブセットのエスケープシーケンスが使われています。
@@ -45,3 +46,8 @@ TINST で切り替えるのが面倒なら、C0 ドライブに開発用 (ANSI)�
  - [RunCPM - Z80 CP/M emulator (GitHub: @MockbaTheBorg)](https://github.com/MockbaTheBorg/RunCPM)
  - [RunCPM (Z80 CP/M 2.2 エミュレータ) (ht-deko.com)](https://ht-deko.com/arduino/runcpm.html)
  - [RunCPM for Windows - a text-based CP/M-Emulator (GitHub: @guidol70)](https://github.com/guidol70/RunCPM_Windows)
+ - [Turbo Pascal 3.0.x の使い方 (Qiita)](https://qiita.com/ht_deko/items/ec212f5cc17cbe5f718b)
+   - [Turbo Pascal 3.0.x の Pascal](https://qiita.com/ht_deko/items/f9f394dc2342afd2ea7b)
+   - [Turbo Pascal 3.0.x のスクリーン設定](https://qiita.com/ht_deko/items/0d8976801c02ec685bd6)
+   - [Turbo Pascal 3.0.x のキーボードショートカット](https://qiita.com/ht_deko/items/86ddf71d0c509125b7ba)
+ - [Turbo Pascal (MSX) に関する情報 (Qiita)](https://qiita.com/ht_deko/items/4a622080b58fbc7d865d)
