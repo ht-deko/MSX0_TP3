@@ -4,15 +4,6 @@
 
 program TPKEYS;
 {$I MDLLIB.LIB}
-const
-  INIFNC = $003E;
-  ERAFNC = $00CC;
-  DSPFNC = $00CF;
-var
-  i: Integer;
-  s: string[10];
-  FNKSTR: array [1..10, 0..15] of Char absolute $F87F;
-  CNSDFG: Byte absolute $F3DE;
 
   procedure Usage;
   begin
@@ -25,8 +16,15 @@ var
   end; { Usage }
 
   procedure ChangeFunction;
+  const
+    INIFNC = $003E;
+    ERAFNC = $00CC;
+    DSPFNC = $00CF;
   var
+    FNKSTR: array [1..10, 0..15] of Char absolute $F87F;
+    CNSDFG: Byte absolute $F3DE;
     i: Integer;
+    s: string[10];
   begin
     for i:=1 to ParamCount do
     begin
