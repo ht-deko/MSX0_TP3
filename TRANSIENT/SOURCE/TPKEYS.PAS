@@ -9,12 +9,12 @@ program TPKEYS;
   begin
     Writeln('TPKEYS [Options]');
     Writeln;
-    Writeln(' /B, /I', #$09, 'Set template for BASIC (Initialize)');
-    Writeln(' /P, /T', #$09, 'Set template for Turbo Pascal');
-    Writeln(' /S', #$09, 'Show the function keys');
-    Writeln(' /H', #$09, 'Hide the function keys');
-    Writeln(' /R', #$09, 'Read settings from FUNCKEYS.DAT');
-    Writeln(' /W', #$09, 'Write current settings to FUNCKEYS.DAT');
+    Writeln(' /B, /I', #$09#$09, 'Set template for BASIC (Initialize)');
+    Writeln(' /P, /T', #$09#$09, 'Set template for Turbo Pascal');
+    Writeln(' /S', #$09#$09, 'Show the function keys');
+    Writeln(' /H', #$09#$09, 'Hide the function keys');
+    Writeln(' /R<:file>', #$09, 'Read settings from file');
+    Writeln(' /W<:file>', #$09, 'Write current settings to file');
   end; { Usage }
 
   procedure ChangeFunction;
@@ -28,13 +28,20 @@ program TPKEYS;
   var
     F: file of TFuncStr;
     i: Integer;
-    s: string[10];
+    s, fn: LibStr;
     FNKSTR: array [1..10] of TFuncStr absolute $F87F;
     CNSDFG: Byte absolute $F3DE;
+    function GetFileName: LibStr;
+    begin
+      if s[3] = ':' then
+        GetFileName := Copy(s, 4, 120)
+      else
+        GetFileName := DATFILE;
+    end;
   begin
     for i:=1 to ParamCount do
     begin
-      s := Copy(ParamStr(i), 1, 2) + '@0';
+      s := ParamStr(i) + #$00#$00;
       if s[1] in ['-', '/'] then
         case UpCase(s[2]) of
           'B', 'I':
@@ -62,7 +69,7 @@ program TPKEYS;
           'H': Bios(ERAFNC);
           'R':
             begin
-              Assign(F, DATFILE);
+              Assign(F, GetFileName);
               {$I-}
               Reset(F);
               {$I+}
@@ -77,7 +84,7 @@ program TPKEYS;
             end;
           'W':
             begin
-              Assign(F, DATFILE);
+              Assign(F, GetFileName);
               Rewrite(F);
               for i:=1 to 10 do
                 Write(F, FNKSTR[i]);
