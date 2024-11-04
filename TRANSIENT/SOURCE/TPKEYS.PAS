@@ -1,5 +1,5 @@
 (*
-  TPKEYS v1.10
+  TPKEYS v1.20
 *)
 
 program TPKEYS;
@@ -63,12 +63,17 @@ program TPKEYS;
           'R':
             begin
               Assign(F, DATFILE);
+              {$I-}
               Reset(F);
-              for i:=1 to 10 do
-                Read(F, FNKSTR[i]);
-              Close(F);
-              if CNSDFG <> 0 then
-                Bios(DSPFNC);
+              {$I+}
+              if IOResult = 0 then
+              begin
+                for i:=1 to 10 do
+                  Read(F, FNKSTR[i]);
+                Close(F);
+                if CNSDFG <> 0 then
+                  Bios(DSPFNC);
+              end;
             end;
           'W':
             begin
