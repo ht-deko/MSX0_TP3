@@ -78,7 +78,7 @@ const
     begin
       r[i] := port[_IOTADR1];
       sv := sv + Chr(r[i] shr 4   + $30);
-      sv := sv + Chr(r[1] and $0F + $30);
+      sv := sv + Chr(r[i] and $0F + $30);
     end;
     if j <> 0 then
     begin
