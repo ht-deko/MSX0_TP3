@@ -1,5 +1,4 @@
 program DHT_KNJ;
-{ ver0.15.20 or later }
 {$I MDLLIB.LIB}
 {$I EXTBIOS.LIB}
 {$I SYSUTILS.LIB}
@@ -7,7 +6,7 @@ program DHT_KNJ;
 type
   Str8 = string[8];
 var
-  A: Real;
+  A: Integer;
   C, K: Byte;
   function GetTime: Str8;
   var
@@ -36,11 +35,11 @@ begin
     GotoXY(1, 4);
     Writeln(#$8E#$9E#$8D#$8F#$81#$40#$81#$40, GetTime);
     Writeln;
-    A := IoTGetReal('device/dht/humidity');
-    Writeln(#$8E#$BC#$93#$78#$81#$40#$81#$40, A:3:1, ' '#$81#$93);
+    A := IoTGetInt('device/dht/humidity');
+    Writeln(#$8E#$BC#$93#$78#$81#$40#$81#$40, A, ' '#$81#$93);
     Writeln;
-    A := IoTGetReal('device/dht/temperature');
-    Writeln(#$89#$B7#$93#$78#$81#$40#$81#$40, A:3:1, ' '#$81#$8E);
+    A := IoTGetInt('device/dht/temperature');
+    Writeln(#$89#$B7#$93#$78#$81#$40#$81#$40, A, ' '#$81#$8E);
     Writeln;
     Delay(100);
   end;

@@ -1,12 +1,11 @@
 program DHT_ANK;
-{ ver0.15.20 or later }
 {$I MDLLIB.LIB}
 {$I SYSUTILS.LIB}
 {$I IOT.LIB}
 type
   Str8 = string[8];
 var
-  A: Real;
+  A: Integer;
   function GetTime: Str8;
   var
     i: byte;
@@ -29,10 +28,10 @@ begin
   begin
     GotoXY(1, 4);
     Writeln('TIME : ', GetTime);
-    A := IoTGetReal('device/dht/humidity');
-    Writeln('HUM. : ', A:3:1, '%');
-    A := IoTGetReal('device/dht/temperature');
-    Writeln('TEMP.: ', A:3:1, #$DF'C');
+    A := IoTGetInt('device/dht/humidity');
+    Writeln('HUM. : ', A, '%');
+    A := IoTGetInt('device/dht/temperature');
+    Writeln('TEMP.: ', A, #$DF'C');
     Delay(100);
   end;
 end.

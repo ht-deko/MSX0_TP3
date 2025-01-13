@@ -4,13 +4,13 @@
 
 const
   _IOTADR1 = $58; { ver0.05.04: $08 }
-  _IOTADR2 = $57; { ver0.05.04: $10 }  
+  _IOTADR2 = $57; { ver0.05.04: $10 }
 
   procedure IotSetNode(s: LibStr);
   var
     i, l: byte;
   begin
-    port[_IOTADR1] := $E0; port[_IOTADR1] := $01; 
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
     port[_IOTADR1] := $53; port[_IOTADR1] := $C0;
     l := Length(s); port[_IOTADR1] := l;
     for i:=1 to l do port[_IOTADR1] := Ord(s[i]);
@@ -23,11 +23,11 @@ const
     v: integer absolute r;
   begin
     IotSetNode(s);
-    port[_IOTADR1] := $E0; port[_IOTADR1] := $01; 
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
     port[_IOTADR1] := $11; port[_IOTADR1] := $80;
     r[0] := port[_IOTADR1]; r[0] := port[_IOTADR1]; r[1] := port[_IOTADR1];
-    IoTFindCount := v;  
-  end; { IoTFindCount }  
+    IoTFindCount := v;
+  end; { IoTFindCount }
 
   procedure IoTFind(s: LibStr; var List, Last: PItem);
   var
@@ -37,7 +37,7 @@ const
     ClearListItem(List);
     Cnt := IoTFindCount(s);
     IotSetNode(s);
-    port[_IOTADR1] := $E0; port[_IOTADR1] := $01; 
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
     port[_IOTADR1] := $13; port[_IOTADR1] := $80;
     for j:=1 to Cnt do
       begin
@@ -53,11 +53,44 @@ const
     v: integer absolute r;
   begin
     IotSetNode(s);
-    port[_IOTADR1] := $E0; port[_IOTADR1] := $01; 
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
     port[_IOTADR1] := $01; port[_IOTADR1] := $80;
     r[0] := port[_IOTADR1]; r[0] := port[_IOTADR1]; r[1] := port[_IOTADR1];
-    IoTGetInt := v;  
-  end; { IoTGetInt }  
+    IoTGetInt := v;
+  end; { IoTGetInt }
+
+  function IoTGetReal(s: LibStr): Real;
+  { ver0.15.20 or later }
+  var
+    r: array [0..7] of byte;
+    i, l: byte;
+    j, k: integer;
+    sv, sv2: LibStr;
+    v: real;
+  begin
+    IotSetNode(s);
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
+    port[_IOTADR1] := $02; port[_IOTADR1] := $80;
+    l := port[_IOTADR1]; r[1] := port[_IOTADR1];
+    j := (r[1] and $7F) - 64;
+    sv := '0.'; if (r[1] and $80) = $80 then sv := '-' + sv;
+    for i:=2 to l do
+    begin
+      r[i] := port[_IOTADR1];
+      sv := sv + Chr(r[i] shr 4   + $30);
+      sv := sv + Chr(r[1] and $0F + $30);
+    end;
+    if j <> 0 then
+    begin
+      Str(j, sv2);
+      sv := sv + 'E'; if j > 0 then sv := sv + '+';
+      sv := sv + sv2;
+    end;
+    Val(sv, v, k);
+    if k <> 0 then
+      v := 0;
+    IoTGetReal := v
+  end; { IoTGetReal }
 
   function IoTGetStr(s: LibStr): LibStr;
   var
@@ -65,7 +98,7 @@ const
     i, l: byte;
   begin
     IotSetNode(s);
-    port[_IOTADR1] := $E0; port[_IOTADR1] := $01; 
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
     port[_IOTADR1] := $03; port[_IOTADR1] := $80;
     l := port[_IOTADR1]; r[0] := Chr(l);
     for i:=1 to l do r[i] := Chr(port[_IOTADR1]);
@@ -75,20 +108,20 @@ const
   procedure IoTPutInt(s: LibStr; v: integer);
   begin
     IotSetNode(s);
-    port[_IOTADR1] := $E0; port[_IOTADR1] := $01; 
-    port[_IOTADR1] := $41; port[_IOTADR1] := $C0; 
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
+    port[_IOTADR1] := $41; port[_IOTADR1] := $C0;
     port[_IOTADR1] := SizeOf(integer);
     port[_IOTADR1] := v and $00FF; port[_IOTADR1] := v shr 8;
-  end; { IoTPutInt }  
-  
+  end; { IoTPutInt }
+
   procedure IoTPutStr(s: LibStr; v: LibStr);
   var
     i, l: byte;
   begin
     IotSetNode(s);
-    port[_IOTADR1] := $E0; port[_IOTADR1] := $01; 
+    port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
     port[_IOTADR1] := $43; port[_IOTADR1] := $C0;
     l := Length(v); port[_IOTADR1] := l;
     for i:=1 to l do port[_IOTADR1] := Ord(v[i]);
     port[_IOTADR1] := $00; l := port[_IOTADR1];
-  end; { IoTPutStr }  
+  end; { IoTPutStr }
