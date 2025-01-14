@@ -59,10 +59,10 @@ const
     IoTGetInt := v;
   end; { IoTGetInt }
 
-  function IoTGetReal(s: LibStr): real;
+ function IoTGetReal(s: LibStr): real;
   { ver0.15.20 or later }
   var
-    r: array [0..7] of byte;
+    r, l: byte;
     i, j: integer;
     sv, sv2: LibStr;
     v: real;
@@ -70,13 +70,13 @@ const
     IotSetNode(s);
     port[_IOTADR1] := $E0; port[_IOTADR1] := $01;
     port[_IOTADR1] := $02; port[_IOTADR1] := $80;
-    r[0] := port[_IOTADR1]; r[1] := port[_IOTADR1];
-    j := (r[1] and $7F) - 64;
-    sv := '0.'; if (r[1] and $80) = $80 then sv := '-' + sv;
-    for i:=2 to r[0] do
+    l := port[_IOTADR1]; r := port[_IOTADR1];
+    j := (r and $7F) - 64;
+    sv := '0.'; if (r and $80) = $80 then sv := '-' + sv;
+    for i:=2 to l do
     begin
-      r[i] := port[_IOTADR1];
-      sv := sv + Chr(r[i] shr 4 + $30) + Chr(r[i] and $0F + $30);
+      r := port[_IOTADR1];
+      sv := sv + Chr(r shr 4 + $30) + Chr(r and $0F + $30);
     end;
     if j <> 0 then
     begin
@@ -84,9 +84,7 @@ const
       sv := sv + 'E'; if j > 0 then sv := sv + '+';
       sv := sv + sv2;
     end;
-    Val(sv, v, i);
-    if i <> 0 then
-      v := 0;
+    Val(sv, v, i); if i <> 0 then v := 0;
     IoTGetReal := v
   end; { IoTGetReal }
 
